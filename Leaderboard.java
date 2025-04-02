@@ -10,7 +10,7 @@ public class Leaderboard {
         Map<String, Long> times = Main.getUserManager().getCompletionTimes();
         
         while (true) {
-            // Print the leaderboard header (keeping original format)
+            // Print the leaderboard header
             System.out.println("\n\n---------- Leaderboard ----------\n");
             
             // Sort and display times from fastest to slowest
@@ -24,7 +24,7 @@ public class Leaderboard {
                     System.out.println(user + " - Fastest time: " + timeDisplay);
                 });
     
-            // Show menu options (keeping original format)
+            // Show menu options
             System.out.println("\n1. Back to Main Menu");
             System.out.print("Choose an option: ");
             
