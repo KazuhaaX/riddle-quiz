@@ -4,43 +4,52 @@ import java.util.Scanner;
 public class Leaderboard {
     private final Scanner scanner = new Scanner(System.in);
 
+    // Shows the leaderboard with fastest completion times
     public void showLeaderboard() {
-        // Updated to use the getter method
-        Map<String, Long> completionTimes = Main.getUserManager().getCompletionTimes();
+        // Get all users' completion times
+        Map<String, Long> times = Main.getUserManager().getCompletionTimes();
         
         while (true) {
-            System.out.println("\n\n                                Leaderboard                              ");
-            completionTimes.entrySet().stream()
+            // Print the leaderboard header (keeping original format)
+            System.out.println("\n\n---------- Leaderboard ----------\n");
+            
+            // Sort and display times from fastest to slowest
+            times.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
                 .forEach(entry -> {
-                    String username = entry.getKey();
+                    String user = entry.getKey();
                     long time = entry.getValue();
-                    System.out.println(username + " - Fastest time: " + 
-                        (time == Long.MAX_VALUE ? "N/A" : formatDuration(time)));
+                    // Format the time display
+                    String timeDisplay = (time == Long.MAX_VALUE) ? "N/A" : formatTime(time);
+                    System.out.println(user + " - Fastest time: " + timeDisplay);
                 });
     
+            // Show menu options (keeping original format)
             System.out.println("\n1. Back to Main Menu");
             System.out.print("Choose an option: ");
             
+            // Handle user input
             try {
                 int choice = scanner.nextInt();
-                scanner.nextLine();
+                scanner.nextLine(); // Clear the input buffer
+                
                 if (choice == 1) {
-                    return;
+                    return; // Go back to main menu
                 } else {
                     System.out.println("Invalid choice. Please try again.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number (1).");
-                scanner.nextLine();
+                scanner.nextLine(); // Clear invalid input
             }
         }
     }
 
-    private String formatDuration(long durationMillis) {
-        long seconds = (durationMillis / 1000) % 60;
-        long minutes = (durationMillis / (1000 * 60)) % 60;
-        long hours = (durationMillis / (1000 * 60 * 60)) % 24;
+    // Helper method to format milliseconds into HH:MM:SS
+    private String formatTime(long millis) {
+        long seconds = (millis / 1000) % 60;
+        long minutes = (millis / (1000 * 60)) % 60;
+        long hours = (millis / (1000 * 60 * 60)) % 24;
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 }
