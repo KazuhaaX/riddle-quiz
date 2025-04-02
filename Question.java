@@ -1,10 +1,12 @@
 public class Question {
-    private int number;
-    private String difficulty;
-    private String text;
-    private String[] options;
-    private char correctAnswer;
+    // Instance variables to store question details
+    private int number;  // Question number
+    private String difficulty;  // Difficulty level (easy, medium, hard)
+    private String text;  // The question text
+    private String[] options;  // Multiple-choice options
+    private char correctAnswer;  // Correct answer (a,b, or c)
 
+    // Constructor to initialize question details
     public Question(int number, String difficulty, String text, String[] options, char correctAnswer) {
         this.number = number;
         this.difficulty = difficulty;
@@ -13,10 +15,24 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    // Getters
-    public int getNumber() { return number; }
-    public String getDifficulty() { return difficulty; }
-    public String getText() { return text; }
-    public String[] getOptions() { return options; }
-    public char getCorrectAnswer() { return correctAnswer; }
+    // Getter methods to access private variables
+    public int getNumber() { 
+        return number; 
+    }
+    
+    public String getDifficulty() { 
+        return difficulty; 
+    }
+    
+    public String getText() { 
+        return text; 
+    }
+    
+    public String[] getOptions() { 
+        return options; 
+    }
+    
+    public char getCorrectAnswer() { 
+        return correctAnswer; 
+    }
 }
