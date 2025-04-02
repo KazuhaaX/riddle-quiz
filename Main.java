@@ -54,7 +54,7 @@ public class Main {
     // Method to show the main menu options
     private static void showMainMenu(String username) {
         while (true) {
-            System.out.println("\n\n---------- Main Menu ----------");
+            System.out.println("\n\n---------- Main Menu ----------\n");
             System.out.println("Hello, " + username + "!");
             System.out.println("Enter 'a' to edit your profile");
             System.out.println("Enter 'l' to see the leaderboard");
