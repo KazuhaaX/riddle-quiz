@@ -14,9 +14,7 @@ public class Leaderboard {
             System.out.println("\n\n---------- Leaderboard ----------\n");
             
             // Sort and display times from fastest to slowest
-            times.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
-                .forEach(entry -> {
+            times.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(entry -> {
                     String user = entry.getKey();
                     long time = entry.getValue();
                     // Format the time display
