@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.Scanner;
 
 public class Leaderboard {
     private final Scanner scanner = new Scanner(System.in);
@@ -15,12 +14,14 @@ public class Leaderboard {
             
             // Sort and display times from fastest to slowest
             times.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(entry -> {
-                    String user = entry.getKey();
-                    long time = entry.getValue();
-                    // Format the time display
-                    String timeDisplay = (time == Long.MAX_VALUE) ? "N/A" : formatTime(time);
-                    System.out.println(user + " - Fastest time: " + timeDisplay);
-                });
+                String user = entry.getKey();
+                long time = entry.getValue();
+                // Format the time display
+                String timeDisplay = "N/A";
+                    if (time >= 0 && time != Long.MAX_VALUE) {
+                        timeDisplay = formatTime(time);}
+            System.out.println(user + " - Fastest time: " + timeDisplay);
+        });
     
             // Show menu options
             System.out.println("\n1. Back to Main Menu");
