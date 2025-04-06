@@ -55,7 +55,6 @@ public class Main {
     private static void showMainMenu(String username) {
         while (true) {
             System.out.println("\n\n---------- Main Menu ----------\n");
-            System.out.println("Hello, " + username + "!");
             System.out.println("Enter 'a' to edit your profile");
             System.out.println("Enter 'l' to see the leaderboard");
             System.out.println("Enter 'p' to start the game");
