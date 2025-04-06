@@ -12,28 +12,34 @@ public class QuizManager {
         try (Scanner fileScanner = new Scanner(new File(QUESTIONS_FILE))) {
             int questionNum = 1;
             while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
-                // Split by commas but ignore commas inside quotes
+                String line = fileScanner.nextLine().trim();
+                if (line.isEmpty()) continue; // Skip empty lines
+    
+                // Split by commas BUT ignore commas inside quotes
                 String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 
-                // Clean up each part
+                // Clean each part (remove outer quotes and trim)
                 for (int i = 0; i < parts.length; i++) {
-                    parts[i] = parts[i].trim().replaceAll("^\"|\"$", "");
+                    parts[i] = parts[i].replaceAll("^\"|\"$", "").trim();
                 }
-                
-                // Create question if we have enough parts
-                if (parts.length >= 6) {
+    
+                // Validate structure: [Difficulty, Question, OptionA, OptionB, OptionC, Answer]
+                if (parts.length == 6) {
                     String difficulty = parts[0];
                     String text = parts[1];
-                    String[] options = Arrays.copyOfRange(parts, 2, parts.length - 1);
-                    char correctAnswer = parts[parts.length - 1].trim().charAt(0);
+                    String[] options = Arrays.copyOfRange(parts, 2, 5); // Options A/B/C
+                    char correctAnswer = parts[5].toUpperCase().charAt(0); // A/B/C
+    
                     questions.add(new Question(questionNum++, difficulty, text, options, correctAnswer));
+                } else {
+                    System.err.println("Skipping malformed line: " + line);
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("No questions found. Please add questions to " + QUESTIONS_FILE);
+            System.err.println("Error: Questions file not found at " + QUESTIONS_FILE);
         }
     }
+    
 
     // Main quiz playing method
     public void playQuiz(String username) {
